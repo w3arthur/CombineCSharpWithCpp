@@ -17,8 +17,6 @@ public interface IHelloC
 
 //view the guides:
 // https://www.youtube.com/watch?v=o-ass4mkdiA&ab_channel=Kettlesimulator
-// https://www.youtube.com/watch?v=8IWFeUkZ4bo&ab_channel=KingTut
-// https://www.youtube.com/watch?v=UsnRGo4y5FQ&ab_channel=KennyGunderman
 internal class Program
 {
     public const string CppDll = @"Dll1.dll";
