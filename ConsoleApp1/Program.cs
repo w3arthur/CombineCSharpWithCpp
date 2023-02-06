@@ -8,13 +8,13 @@ using System.Runtime.InteropServices;
     public static  int hello3();
 }
 */
-public interface IHelloC
+/*public unsafe interface IHelloC
 {
-    public int hello1();
-    public int hello3();
+*//*    public int hello1();
+    public int hello3();*//*
 }
 
-
+*/
 //view the guides:
 // https://www.youtube.com/watch?v=o-ass4mkdiA&ab_channel=Kettlesimulator
 internal class Program
@@ -26,7 +26,7 @@ internal class Program
     public static extern int hello3();
 
     [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
-    public static extern IHelloC createHelloC();
+    public static extern IntPtr createHelloC();
 
 
 
@@ -44,9 +44,20 @@ internal class Program
 
 
         /// Use Unsafe mode 
-        IHelloC helloC = createHelloC();
+        /// 
 
-        Console.WriteLine("dll class value");
-        Console.WriteLine(helloC.hello3());
+
+        unsafe
+        {
+            var helloC = createHelloC();
+            Console.WriteLine("dll class value");
+            //Console.WriteLine(helloC.hello1());
+
+            // Unsafe context: can use pointers here.  
+        }
+        
+
+        
+        
     }
 }
