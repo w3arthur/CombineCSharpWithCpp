@@ -5,6 +5,8 @@
 #endif
 
 
+#include <string>
+
 #pragma once
 
 class IHelloC
@@ -27,5 +29,27 @@ extern "C" DLL1_API IHelloC * createHelloC()
 {
 	return new HelloC();
 }
+
+extern "C" DLL1_API int HelloC_hello1(IHelloC * helloC)
+{
+	return helloC->hello1();
+}
+
+extern "C" DLL1_API void EndHelloC(IHelloC* helloC)
+{
+	delete helloC;
+}
+
+extern "C" DLL1_API int HelloC_hello3()	//static
+{
+	return HelloC::hello3();
+}
+
+
+extern "C" DLL1_API const char* StringOutPut()	//static
+{
+	return "hello from c++ string";
+}
+
 
 extern "C" DLL1_API int hello3() { return 12435346; }

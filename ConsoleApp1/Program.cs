@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 // https://www.youtube.com/watch?v=o-ass4mkdiA&ab_channel=Kettlesimulator
 internal class Program
 {
-    public const string CppDll = @"Dll1.dll";
+    public const string CppDll = @"Dll1.dll";   //copied to the project
     [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
     public static extern int hello2();
     [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
@@ -27,6 +27,19 @@ internal class Program
 
     [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
     public static extern IntPtr createHelloC();
+
+    [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
+    public static extern int HelloC_hello1(IntPtr helloC);
+
+    [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
+    public static extern void EndHelloC(IntPtr helloC);
+
+    [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
+    public static extern int HelloC_hello3();   //static  in class
+
+    [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr StringOutPut();
+
 
 
 
@@ -36,28 +49,53 @@ internal class Program
 
         //string aaa = Hello.hello(); // C#
 
-        int aaa = hello2(); //c++
-        int bbb = hello3(); //c++
 
-
-        Console.WriteLine(bbb);
-
-
-        /// Use Unsafe mode 
-        /// 
-
-
-        unsafe
+        try
         {
+
+
+
+
+            int aaa = hello2(); //c++
+            int bbb = hello3(); //c++
+
+
+            Console.WriteLine(bbb);
+
+
+            /// Use Unsafe mode 
+            /// 
+
+
+
             var helloC = createHelloC();
             Console.WriteLine("dll class value");
-            //Console.WriteLine(helloC.hello1());
+            Console.WriteLine(HelloC_hello1(helloC));
+            EndHelloC(helloC);
+            Console.WriteLine(HelloC_hello3()); //static
 
-            // Unsafe context: can use pointers here.  
+
+
+
+
+            var cppStrOutPut = StringOutPut();
+            string? str = Marshal.PtrToStringAnsi(cppStrOutPut);
+            Console.WriteLine(str);
+
+
         }
-        
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        //finally { }
 
-        
-        
+
+        // Unsafe context: can use pointers here.  
+
+
+
+
+
     }
 }
