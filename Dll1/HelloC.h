@@ -51,5 +51,11 @@ extern "C" DLL1_API const char* StringOutPut()	//static
 	return "hello from c++ string";
 }
 
+extern "C" DLL1_API std::string StringOutPut2()	//static
+{
+	return "hello from c++ std::string2";
+}
+
+
 
 extern "C" DLL1_API int hello3() { return 12435346; }

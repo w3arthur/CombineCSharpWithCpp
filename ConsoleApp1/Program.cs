@@ -39,7 +39,8 @@ internal class Program
 
     [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
     public static extern IntPtr StringOutPut();
-
+    [DllImport(CppDll, CallingConvention = CallingConvention.Cdecl)]
+    public static extern IntPtr StringOutPut2();
 
 
 
@@ -81,6 +82,11 @@ internal class Program
             var cppStrOutPut = StringOutPut();
             string? str = Marshal.PtrToStringAnsi(cppStrOutPut);
             Console.WriteLine(str);
+
+
+            var cppStrOutPut2 = StringOutPut2();    //str::string, not working this way
+            string? str2 = Marshal.PtrToStringAnsi(cppStrOutPut2);
+            Console.WriteLine(str2);
 
 
         }
